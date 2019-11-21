@@ -3,5 +3,7 @@
     void redSmallZone5();
     void blueSmallZone5();
     void oneCubeSafety();
-    void redSmallZone6();
+    void redSmallZone8();
+    void redBigZone();
+    void blueBigZone();
 #endif
