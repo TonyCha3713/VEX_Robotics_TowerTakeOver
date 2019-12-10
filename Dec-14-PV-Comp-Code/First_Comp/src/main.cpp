@@ -36,6 +36,7 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
+/*
 int autonCount = 0;
 
 void lcdScroll() {
@@ -59,16 +60,16 @@ void lcdScroll() {
 		case 2:
 			lcd::set_text(1, "blue Smallzone 5");
 			break;
-		case 3
+		case 3:
 			lcd::set_text(1, "red BigZone");
 			break;
-		case 4
+		case 4:
 			lcd::set_text(1, "Blue BigZone");
 			break;
-		case 5
+		case 5:
 			lcd::set_text(1, "red SmallZone 8");
 			break;
-		case 6
+		case 6:
 			lcd::set_text(1, "Blue SmallZone 8");
 			break;
 		default:
@@ -99,28 +100,19 @@ void on_right_pressed() {
 	lcdScroll();
 
 }
+*/
 void competition_initialize() {
-	lcd::initialize();
+	/*lcd::initialize();
 	lcd::set_text(0, "Choose auton");
 	lcdScroll();
 	lcd::register_btn0_cb(on_left_pressed);
 	lcd::register_btn1_cb(on_center_pressed);
 	lcd::register_btn2_cb(on_right_pressed);
-
+*/
 }
 
 void autonomous() {
-	if(autonCount == 0)
-    	oneCubeSafety();
-
-    else if(autonCount == 1)
-    	redSmallZone5();
-    
-    else if(autonCount == 2)
-    	blueSmallZone5();*/
-	//oneCubeSafety();
-
-	//redSmallZone5();
+	blueSmallZone8();
 }
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -140,12 +132,12 @@ void opcontrol() {
 	leftBase2.set_brake_mode(E_MOTOR_BRAKE_COAST);
 	rightBase1.set_brake_mode(E_MOTOR_BRAKE_COAST);
 	rightBase2.set_brake_mode(E_MOTOR_BRAKE_COAST);
-	Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-	Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-	Tray.set_brake_mode(E_MOTOR_BRAKE_COAST);
+	//Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+	//Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+	PID trayPID (0.09,0,0);
 	while (true) {
-		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y) * .7);
-		runRightBase(master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y) * .7);
+		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y) * .8);
+		runRightBase(master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y) * .8);
 		if(master.get_digital(E_CONTROLLER_DIGITAL_R1))
 			runIntake(115);
 		else if(master.get_digital(E_CONTROLLER_DIGITAL_R2))
@@ -156,20 +148,27 @@ void opcontrol() {
 		{
 			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			Tray.setError(x - TrayPot.getvalue());
-			runTray(tray.runPID());
-
+			trayPID.setError(trayPot.get_value() - 653);
+			runTray(trayPID.runPID());
+			//runTray(-75);
 		}
 		else if(master.get_digital(E_CONTROLLER_DIGITAL_L2))
 		{
 			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			runTray(-100);
-
+			//trayPID.setError(abs(trayPot.get_value() - 3000));
+			//runTray(trayPID.runPID());
+			runTray(-85);
 		}
 		else
+		{
+			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+			//trayPID.setError(0);
+			//runTray(trayPID.runPID());
 			runTray(0);
-		if(master.get_digital(E_CONTROLLER_DIGITAL_A))
+		}
+		/*if(master.get_digital(E_CONTROLLER_DIGITAL_A))
 		{
 			runArm(85);
 		}
@@ -179,5 +178,8 @@ void opcontrol() {
 		}
 		else
 			runArm(0);
+			*/
+		std::cout << trayPot.get_value() - 695 << std::endl;
+		delay(10);
 	}
 }

@@ -54,6 +54,7 @@ void opcontrol(void);
 
 #ifdef __cplusplus
  //You can add C++-only headers here
+  #include "./subsystems./pid.h"
   #include "./subsystems./base.h"
   #include "./subsystems./intake.h"
   #include "./subsystems./tray.h"

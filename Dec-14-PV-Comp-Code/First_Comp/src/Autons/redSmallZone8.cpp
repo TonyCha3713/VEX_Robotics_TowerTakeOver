@@ -1,7 +1,9 @@
 #include "main.h"
 void redSmallZone8()
 {
-    runIntake(200);
+    moveBasePID(1000,1000,6000);
+    //moveBase(1000,6000);
+    /*runIntake(200);
     moveBase(1255,75);
     delay(3000);
     turnBase(-25,75);
@@ -25,6 +27,6 @@ void redSmallZone8()
     runIntake(-100);
     delay(500);
     moveBase(-400,150);
-
+*/
     
 }

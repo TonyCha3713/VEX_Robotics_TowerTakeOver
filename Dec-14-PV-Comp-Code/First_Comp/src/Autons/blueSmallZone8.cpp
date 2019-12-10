@@ -1,0 +1,52 @@
+#include "main.h"
+void blueSmallZone8()
+{
+    runIntake(-120);
+    moveBase(300,100);
+    runTray(15);
+    delay(2500);
+    runIntake(0);
+    runTray(-60);
+    delay(150);
+    runIntake(100);
+    moveBasePID(1100,1100,1000);
+    /*
+    runIntake(-90);
+    delay(700);
+    runIntake(100);
+    moveBase(1100,100);
+    delay(2200);
+    turnBase(90,70);
+    delay(400);
+    moveBase(-1100,100);
+    delay(2500);
+    turnBase(-80,70);
+    delay(300);
+    moveBase(1100,90);
+    delay(2500);
+    moveBase(-700,100);
+    */
+   // delay(4000);
+    //moveBase(-,100);
+    //delay(700);
+    /*delay();
+    moveBase();
+    delay();
+    turnBase();
+    delay();
+    moveBase();
+    delay();
+    turnBase();
+    delay();
+    moveBase();
+    delay();
+    moveBase();
+    delay();
+    turnBase();
+    delay();
+    moveBase();
+    delay();
+    pidTray();
+    moveBase();
+*/
+}
