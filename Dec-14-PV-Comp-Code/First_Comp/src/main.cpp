@@ -132,8 +132,8 @@ void opcontrol() {
 	leftBase2.set_brake_mode(E_MOTOR_BRAKE_COAST);
 	rightBase1.set_brake_mode(E_MOTOR_BRAKE_COAST);
 	rightBase2.set_brake_mode(E_MOTOR_BRAKE_COAST);
-	//Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-	//Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+	Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+	Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	PID trayPID (0.09,0,0);
 	while (true) {
 		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y) * .8);
@@ -164,8 +164,6 @@ void opcontrol() {
 		{
 			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			//trayPID.setError(0);
-			//runTray(trayPID.runPID());
 			runTray(0);
 		}
 		/*if(master.get_digital(E_CONTROLLER_DIGITAL_A))
@@ -179,7 +177,6 @@ void opcontrol() {
 		else
 			runArm(0);
 			*/
-		std::cout << trayPot.get_value() - 695 << std::endl;
 		delay(10);
 	}
 }
