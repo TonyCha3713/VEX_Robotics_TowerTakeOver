@@ -1,52 +1,25 @@
 #include "main.h"
 void blueSmallZone8()
 {
-    runIntake(-120);
-    moveBase(300,100);
-    runTray(15);
-    delay(2500);
+    runIntake(-130);
+    moveBasePID(280,280,500);
     runIntake(0);
-    runTray(-60);
-    delay(150);
+    runTray(30);
+    delay(500);
+    runTray(-50);
     runIntake(100);
-    moveBasePID(1100,1100,1000);
-    /*
-    runIntake(-90);
-    delay(700);
-    runIntake(100);
-    moveBase(1100,100);
-    delay(2200);
-    turnBase(90,70);
-    delay(400);
-    moveBase(-1100,100);
-    delay(2500);
-    turnBase(-80,70);
+    delay(200);
+    moveBase(1200,80);
+    delay(2700);
+    turnBase(46,75);
     delay(300);
-    moveBase(1100,90);
+    runLeftBase(-150);
+    runRightBase(-170);
     delay(2500);
-    moveBase(-700,100);
-    */
-   // delay(4000);
-    //moveBase(-,100);
-    //delay(700);
-    /*delay();
-    moveBase();
-    delay();
-    turnBase();
-    delay();
-    moveBase();
-    delay();
-    turnBase();
-    delay();
-    moveBase();
-    delay();
-    moveBase();
-    delay();
-    turnBase();
-    delay();
-    moveBase();
-    delay();
-    pidTray();
-    moveBase();
-*/
+    //moveBasePID(-1180,-1180,2500);
+    turnBase(-49,75);
+    delay(300);
+    moveBase(1100,78);
+    delay(2700);
+    
 }
