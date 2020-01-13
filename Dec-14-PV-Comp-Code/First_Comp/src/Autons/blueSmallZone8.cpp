@@ -2,24 +2,31 @@
 void blueSmallZone8()
 {
     runIntake(-130);
-    moveBasePID(280,280,500);
+    runTray(50);
+    moveBasePID(345,345,400);
+    delay(350);
+    runTray(-30);
+    runIntake(130);
+    moveBase(1050,70);
+    delay(3000);
+    runTray(0);
+    runLeftBase(-65);
+    runRightBase(-115);
+    delay(1560);
+    runLeftBase(0);
+    runRightBase(0);
+    turnBase(-245,75);
+    delay(700);
+    moveBase(1050,64);
+    delay(3000);
+    moveBasePID(-800,-800,1300);
+    turnBase(-247,75);
+    delay(900);
+    moveBasePID(440,440,500);
     runIntake(0);
-    runTray(30);
-    delay(500);
-    runTray(-50);
-    runIntake(100);
-    delay(200);
-    moveBase(1200,80);
-    delay(2700);
-    turnBase(46,75);
-    delay(300);
-    runLeftBase(-150);
-    runRightBase(-170);
-    delay(2500);
-    //moveBasePID(-1180,-1180,2500);
-    turnBase(-49,75);
-    delay(300);
-    moveBase(1100,78);
-    delay(2700);
-    
+    delay(100);
+    pidTray(2400);
+    runIntake(-75);
+    moveBasePID(-300,-300,900);
+
 }

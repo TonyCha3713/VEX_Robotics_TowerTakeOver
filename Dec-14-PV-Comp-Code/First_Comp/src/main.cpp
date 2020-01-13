@@ -112,7 +112,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	blueSmallZone8();
+	redBigZone();
 }
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -148,7 +148,7 @@ void opcontrol() {
 		{
 			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			trayPID.setError(trayPot.get_value() - 653);
+			trayPID.setError(trayPot.get_value() - 665);
 			runTray(trayPID.runPID());
 			//runTray(-75);
 		}

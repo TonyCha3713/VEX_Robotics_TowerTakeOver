@@ -7,4 +7,6 @@
     void blueSmallZone8();
     void redBigZone();
     void blueBigZone();
+    void blueSmallZone6();
+    void redSmallZone6();
 #endif
