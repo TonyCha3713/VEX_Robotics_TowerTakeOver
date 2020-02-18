@@ -1,22 +1,26 @@
 #include "main.h"
 void redBigZone()
 {
-    runIntake(-150);
-    delay(2500);
-    runIntake(200);
-    moveBase(1300,70);
-    delay(3300);
-    turnBase(-330,65);
+    moveBasePID(350,350,600);
+    moveBasePID(-300,-300,450);
+    runArm(85);
+    delay(250);
+    runIntake(-110);
+    delay(750);
+    runArm(-130);
     delay(1000);
-    moveBase(1200,70);
-    delay(3800);
-    runTray(75);
-    runIntake(-10);
-    delay(2500);
-    runIntake(-90);
-    delay(1300);
-    moveBase(-400,75);
-    runTray(-100);
-    delay(3000);
-    moveBase(-100,75);
+    runIntake(100);
+    moveBase(700,75);
+    delay(1200);
+    turnBase(-300,75);
+    delay(1000);
+    moveBase(500,75);
+    delay(850);
+    turnBase(-180,75);
+    delay(600);
+    moveBase(535,75);
+    delay(700);
+    runIntake(0);
+    pidTray(3000);
+    moveBasePID(-300,-300,450);
 }

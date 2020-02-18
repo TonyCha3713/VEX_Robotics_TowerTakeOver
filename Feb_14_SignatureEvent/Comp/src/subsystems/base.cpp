@@ -26,6 +26,7 @@ void turnBase(double input, double speed)
     rightBase1.move_relative(-input, speed); 
     rightBase2.move_relative(-input, speed); 
 }
+
 double getLeftBase() {
 
     return (leftBase1.get_position() + leftBase2.get_position()) / 2.0;
@@ -55,7 +56,4 @@ void moveBasePID(double leftBaseDeltaTicks, double rightBaseDeltaTicks, double t
      }
     runLeftBase(0);
     runRightBase(0);
-
 }
-
-

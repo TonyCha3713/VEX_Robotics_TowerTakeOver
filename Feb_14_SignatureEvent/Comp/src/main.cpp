@@ -18,6 +18,7 @@
 void initialize() {
 	Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+	arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 }
 
 /**
@@ -112,7 +113,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	redBigZone();
+	redSmallZone6();
 }
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -134,11 +135,12 @@ void opcontrol() {
 	rightBase2.set_brake_mode(E_MOTOR_BRAKE_COAST);
 	Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-	PID trayPID (0.09,0,0);
-	PID ArmPID (0.2,0,0);
+	PID trayPID (0.26,0,0);
+	PID armPID (0.3,0,0);
+	bool ok = false;
 	while (true) {
-		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y) * .8);
-		runRightBase(master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y) * .8);
+		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
+		runRightBase(master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 		if(master.get_digital(E_CONTROLLER_DIGITAL_R1))
 			runIntake(115);
 		else if(master.get_digital(E_CONTROLLER_DIGITAL_R2))
@@ -149,13 +151,15 @@ void opcontrol() {
 		{
 			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			runTray(85);
+			trayPID.setError(1720 + Tray.get_position());
+			runTray(trayPID.runPID());
 		}
 		else if(master.get_digital(E_CONTROLLER_DIGITAL_L2))
 		{
 			Intake1.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 			Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			runTray(-85);
+			trayPID.setError(0 + Tray.get_position());
+			runTray(trayPID.runPID());
 		}
 		else
 		{
@@ -165,19 +169,43 @@ void opcontrol() {
 		}
 		if(master.get_digital(E_CONTROLLER_DIGITAL_UP))
 		{
+			ok = true;
 			arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			runArm(100);
+			armPID.setError(663 - arm.get_position() + 5);
 		}
 		else if(master.get_digital(E_CONTROLLER_DIGITAL_DOWN))
 		{
+			ok = true;
 			arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			runArm(-100);
+			armPID.setError(812 - arm.get_position() + 5);
 		}
-		else
+		else if(master.get_digital(E_CONTROLLER_DIGITAL_RIGHT))
 		{
+			ok = false;
 			arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
-			runArm(0);
+			runArm(85);
 		}
+		else if(master.get_digital(E_CONTROLLER_DIGITAL_LEFT))
+		{
+			ok = false;
+			arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+			runArm(-85);
+		}
+		else runArm(0);
+		
+		if(master.get_digital(E_CONTROLLER_DIGITAL_B))
+		{
+			moveBasePID(350,350,600);
+			moveBasePID(-185,-185,450);
+			runArm(85);
+			delay(250);
+			runIntake(-110);
+			delay(750);
+			runArm(-130);
+			delay(1000);
+		}
+		//std:: cout << arm.get_position() << std:: endl;
+		if(ok)	runArm(armPID.runPID());
 		delay(10);	
 	}
 }
