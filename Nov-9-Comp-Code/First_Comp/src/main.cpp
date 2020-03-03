@@ -36,7 +36,7 @@ void disabled() {}
  * This task will exit when the robot is enabled and autonomous or opcontrol
  * starts.
  */
-int autonCount = 0;
+//int autonCount = 0;
 
 void lcdScroll() {
 
