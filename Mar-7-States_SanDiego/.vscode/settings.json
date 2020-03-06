@@ -53,5 +53,12 @@
         "xtree": "cpp",
         "xutility": "cpp"
     },
-    "C_Cpp.errorSquiggles": "Disabled"
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.minimumContrastRatio": 1,
+    "workbench.colorCustomizations": {
+        "terminal.foreground": "#fd1e00",
+        "terminal.background": "#000000"
+    },
+    "terminal.integrated.cursorStyle": "underline"
 }

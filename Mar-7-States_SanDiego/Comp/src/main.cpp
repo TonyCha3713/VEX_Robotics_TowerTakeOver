@@ -113,7 +113,7 @@ void competition_initialize() {
 }
 
 void autonomous() {
-	blueSmallZone7();
+	redBigZone();
 }
 /**
  * Runs the operator control code. This function will be started in its own task
@@ -137,8 +137,8 @@ void opcontrol() {
 	Intake2.set_brake_mode(E_MOTOR_BRAKE_HOLD);
 	PID trayPID (0.205,0,0);
 	PID armPID (0.3,0,0);
-	bool ok = false;
 	while (true) {
+		bool ok = false;
 		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
 		runRightBase(master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 		if(master.get_digital(E_CONTROLLER_DIGITAL_R1))
@@ -171,7 +171,6 @@ void opcontrol() {
 		{
 			if(Tray.get_position() > - 591)
 				runTray(115);
-			
 			else 
 			{
 				arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
@@ -179,6 +178,30 @@ void opcontrol() {
 				runArm(115);
 			}
 		}
+			/*
+			if(!ok)
+			{
+				if(Tray.get_position() > - 591)
+				{
+					runTray(115);
+				}
+				else
+				{
+					runTray(0);
+					ok = true;
+				}
+				while(ok)
+				{
+					if(arm.get_position() < 40) runIntake(-115);
+					else runIntake(0);
+					arm.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+					Tray.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+					runArm(115);
+					if(master.get_digital(E_CONTROLLER_DIGITAL_LEFT)) break;
+				}
+			}
+			*/
+		
 		else if(master.get_digital(E_CONTROLLER_DIGITAL_LEFT))
 		{
 			
@@ -188,7 +211,7 @@ void opcontrol() {
 		}
 		else runArm(0);
 		
-		//std:: cout << Tray.get_position() << std:: endl;
+		//std:: cout << arm.get_position() << std:: endl;
 		delay(10);	
 	}
 }
