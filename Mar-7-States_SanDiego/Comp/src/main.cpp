@@ -138,7 +138,6 @@ void opcontrol() {
 	PID trayPID (0.205,0,0);
 	PID armPID (0.3,0,0);
 	while (true) {
-		bool ok = false;
 		runLeftBase(master.get_analog(E_CONTROLLER_ANALOG_LEFT_Y));
 		runRightBase(master.get_analog(E_CONTROLLER_ANALOG_RIGHT_Y));
 		if(master.get_digital(E_CONTROLLER_DIGITAL_R1))
