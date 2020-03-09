@@ -1,0 +1,32 @@
+#include "main.h"
+void blueBigZone()
+{
+    Tray.set_brake_mode(E_MOTOR_BRAKE_HOLD);
+    runIntake(115);
+    //moveBase(1400,130);
+    //delay(2000);
+    moveBase(300,75);
+    delay(300);
+    moveBasePID(1400,1400,1250);
+    turnBase(-150,75);
+    delay(750);
+    moveBase(300,130);
+    delay(1000);
+    turnBase(150,75);
+    delay(1000);
+    moveBasePID(-800,-800,1200);
+    turnBase(-355,75);
+    delay(1300);
+    moveBase(870,150);
+    delay(2000);
+    moveBasePID(-700,-700,1000);
+    turnBase(-503,75);
+    delay(1700);
+    runIntake(0);
+    moveBasePID(730,730,900);
+    runIntake(-80);
+    delay(100);
+    runIntake(0);
+    pidTray(2000);
+    moveBasePID(-500,-500,1000);
+}
